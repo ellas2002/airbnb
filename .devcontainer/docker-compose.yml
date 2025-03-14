@@ -15,7 +15,7 @@ services:
 
   # database
   mysql_db:
-    hostname: mysql_db
+    hostname: mysqlServer
     image: mysql/mysql-server:latest
     environment:
       - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
