@@ -17,3 +17,7 @@
     object-fit: cover;
     /*margin: auto;*/
   }
+
+  #modal-img img{
+    width: 100%
+  }
