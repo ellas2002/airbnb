@@ -55,8 +55,8 @@
         <img src="https://a0.muscache.com/pictures/miso/Hosting-595680673819411804/original/a6e6fda5-2935-4e2e-ba34-2fc50bba5cf3.jpeg">
 
         <div class="card-body">
-            <h5 class="card-title">Kerns</h5>
-            <p class="card-text">1922 Craftsman Compound in Laurelhurst ~ Sleeps 12<br>Entire home/apt</p>
+            <h5 class="card-title">1922 Craftsman Compound in Laurelhurst ~ Sleeps 12<br>Entire home/apt</h5>
+            <p class="card-text">Kerns neighborhood</p>
             <p class="card-text">Accommodates 16</p>
 
             <p class="card-text align-bottom">
@@ -97,14 +97,14 @@
       <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-title">Private Rooftop Flat~ 14 Guests ~ 94 WalkScore</h5>
+                    <h5 class="modal-title" id="modal-title">1922 Craftsman Compound in Laurelhurst ~ Sleeps 12e</h5>
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modal-image">
-                    <img src="https://a0.muscache.com/pictures/miso/Hosting-816145492959772426/original/0dc00636-64de-4101-a65e-0ea83b974d83.jpeg" class="img-fluid">
+                    <img src="https://a0.muscache.com/pictures/miso/Hosting-595680673819411804/original/a6e6fda5-2935-4e2e-ba34-2fc50bba5cf3.jpeg" class="img-fluid">
                 </div>
                 <div class="modal-footer">
-                    <p>Hosford-Abernethy</p><p>$731.00 / night</p><p>Accommodates 14</p><p><i class="bi bi-star-fill"></i> 5.00</p><p>Hosted by Bob</p><p>Amenities: Air conditioning, Bathtub, Bed linens, Body soap, Carbon monoxide alarm, Cleaning products, Clothing storage, Coffee, Coffee maker: Keurig coffee machine, Conditioner, Cooking basics, Dedicated workspace, Dishes and silverware, Dishwasher, Dryer, Essentials, Fire extinguisher, First aid kit, Free street parking, Freezer, Hair dryer, Hangers, Heating, Hot water, Hot water kettle, Iron, Kitchen, Laundromat nearby, Long term stays allowed, Luggage dropoff allowed, Microwave, Outdoor dining area, Outdoor furniture, Oven, Pack ’n play/Travel crib, Private entrance, Private patio or balcony, Refrigerator, Room-darkening shades, Self check-in, Shampoo, Shower gel, Smart lock, Smoke alarm, Stove, TV, Toaster, Washer, Wifi, Wine glasses</p><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <p>Hosford-Abernethy</p><p>$731.00 / night</p><p>Accommodates 12</p><p><i class="bi bi-star-fill"></i> 5.00</p><p>Hosted by Bob</p><p>Amenities: Air conditioning, Bathtub, Bed linens, Body soap, Carbon monoxide alarm, Cleaning products, Clothing storage, Coffee, Coffee maker: Keurig coffee machine, Conditioner, Cooking basics, Dedicated workspace, Dishes and silverware, Dishwasher, Dryer, Essentials, Fire extinguisher, First aid kit, Free street parking, Freezer, Hair dryer, Hangers, Heating, Hot water, Hot water kettle, Iron, Kitchen, Laundromat nearby, Long term stays allowed, Luggage dropoff allowed, Microwave, Outdoor dining area, Outdoor furniture, Oven, Pack ’n play/Travel crib, Private entrance, Private patio or balcony, Refrigerator, Room-darkening shades, Self check-in, Shampoo, Shower gel, Smart lock, Smoke alarm, Stove, TV, Toaster, Washer, Wifi, Wine glasses</p><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
