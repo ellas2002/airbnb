@@ -50,10 +50,12 @@
 
             <div class="col-auto">
                 <form method="GET" action="results.php">
+
                     <!-- Neighborhood: an alphabetized select menu (populate w/SQL query) -->
                     <div class="neigh">
                         <label for="neighborhood" class="form-label">Neighborhood</label>
                         <select id="neigh-select" name="hood">
+                            <!-- have no idea if any should be a selection or not and how that would work sooooo i disabled it :)-->
                             <option selected="selected" disabled="disabled">Any</option>
                             <?php foreach ($_SESSION['hoods'] as $hood): ?>
                                 <option value="<?= htmlspecialchars($hood['id']); ?>"
@@ -70,6 +72,7 @@
                 <div class="mb-3">
                     <label for="roomType" class="form-label">Room Type</label>
                     <select id="roomType" name="room" >
+                    <!-- have no idea if any should be a selection or not and how that would work sooooo i disabled it :)-->
                     <option selected="selected" disabled="disabled">Any</option>
                     <?php foreach ($_SESSION['room'] as $rooms): ?>
                         <option value="<?= htmlspecialchars($rooms['id']); ?>"
@@ -95,7 +98,9 @@
                         ?>
                     </select>
                 </div>
-
+                
+                <!-- dont know how the fuck I am suppose to override bootstraps style stuff. Fuck that spent to long on this -->
+                <!-- this is the submit button...-->
                 <button type="submit" class="btn-primary" style="background-color: #007bff; border-color: #007bff; color: white">Submit</button>
 
                 </form>
