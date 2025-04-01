@@ -1,3 +1,7 @@
+<?php
+    include 'src/functions.php';
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -42,20 +46,60 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-        <h1>a title:</h1>
+            <h1>Search for rentals in a Portland Area:</h1>
 
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="neighborhood" class="col-form-label">sample form element label</label>
+            <div class="col-auto">
+                <form method="GET" action="results.php">
+                    <!-- Neighborhood: an alphabetized select menu (populate w/SQL query) -->
+                    <div class="neigh">
+                        <label for="neighborhood" class="form-label">Neighborhood</label>
+                        <select id="neigh-select" name="hood">
+                            <option selected="selected" disabled="disabled">Any</option>
+                            <?php foreach ($_SESSION['hoods'] as $hood): ?>
+                                <option value="<?= htmlspecialchars($hood['id']); ?>"
+                                    <?= (isset($_GET['hood']) && $_GET['hood'] == $hood['id']) ? 'selected' : ''; ?>>
+                                    <?= htmlspecialchars($hood['neighborhood']); ?> 
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                
+
+
+                <!-- Room Type: an alphabetized select menu (populate w/SQL query) -->
+                <div class="mb-3">
+                    <label for="roomType" class="form-label">Room Type</label>
+                    <select id="roomType" name="room" >
+                    <option selected="selected" disabled="disabled">Any</option>
+                    <?php foreach ($_SESSION['room'] as $rooms): ?>
+                        <option value="<?= htmlspecialchars($rooms['id']); ?>"
+                            <?= (isset($_GET['room']) && $_GET['room'] == $hood['id']) ? 'selected' : ''; ?>>
+                            <?= htmlspecialchars($rooms['type']); ?> <!-- Change 'name' to correct column -->
+                        </option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+            
+
+                <!-- Number of guests: (1-10, using PHP’s “range” function) -->
+                <div class="mb-3">
+                    <label for="guestNum" class="form-label">Number of Guests</label>
+                    <select id ="guestNum" name="guestNum">
+                        <?php
+                            for ($i=1; $i<=10; $i++)
+                            {
+                                ?>
+                                    <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                <?php
+                            }
+                        ?>
+                    </select>
                 </div>
 
-                <div class="col-auto">
-                        form element here
-                </div>
+                <button type="submit" class="btn-primary" style="background-color: #007bff; border-color: #007bff; color: white">Submit</button>
 
+                </form>
             </div><!-- row -->
-
-
         </div><!-- .container-->
     </div><!-- album-->
 
