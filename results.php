@@ -1,3 +1,12 @@
+<?php
+    include 'src/functions.php';
+    $db = dbConnect();
+    $listingInfo = getListings();
+    $neighborhoods = getNeighborhood();
+    $hostInfo = getHost();
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -28,7 +37,7 @@
         <div class="navbar navbar-dark bg-dark shadow-sm">
             <div class="container">
             <a href="index.php" class="navbar-brand d-flex align-items-center">
-                <i class="bi bi-house-heart-fill my-2"></i>    
+                <i class="bi bi-housnamee-heart-fill my-2"></i>    
                 <strong> Fake Airbnb</strong>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,47 +51,49 @@
 
 
 
-        <div class="container">
-
-            <h1>Some Text</h1>
-
+<div class="container">
+    <h1>Results</h1>
 
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="row row-cols-3 g-3">
+        <!--for loop that allows multiple cards-->
+        <?php
+            $length = count($listingInfo);
+            for ($x = 0; $x < $length; $x++) {
+        ?>
+        <div class="col">
+            <div class="card shadow-sm">
 
-<div class="col">
-    <div class="card shadow-sm">
-        <img src="https://a0.muscache.com/pictures/miso/Hosting-595680673819411804/original/a6e6fda5-2935-4e2e-ba34-2fc50bba5cf3.jpeg">
+                <!--the grab of data from database begins...-->
+                
+                <img src="<?= htmlspecialchars($listingInfo[$x]['pictureUrl']); ?>">
 
-        <div class="card-body">
-            <h5 class="card-title">1922 Craftsman Compound in Laurelhurst ~ Sleeps 12</h5>
-            <p class="card-text">Kerns neighborhood</p>
-            <p class="card-text">Entire home/apt</p>
-            
-            <p class="card-text">Accommodates 12</p>
+                <div class="card-body">            
+        
+                    <h5 class="card-title"> <?= htmlspecialchars($listingInfo[$x]['name']); ?> </h5>
+                    <p class="card-text"><?= htmlspecialchars($neighborhoods[$x]['neighborhood']); ?></p> 
+                    <p class="card-text">Entire home/apt</p>
+                    
+                    <p class="card-text">Accommodates: <?= htmlspecialchars($listingInfo[$x]['accommodates']); ?></p>
 
-            <p class="card-text align-bottom">
-            <i class="bi bi-star-fill"></i><span class=""> 5.00</span>
-            </p>
+                    <p class="card-text align-bottom">
+                    <i class="bi bi-star-fill"></i><span class=""> <?= htmlspecialchars($listingInfo[$x]['rating']); ?></span>
+                    </p>
 
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                    <button type="button" id="3301" class="btn btn-sm btn-outline-secondary viewListing" data-bs-toggle="modal" data-bs-target="#fakeAirbnbnModal">View</button>
-    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" id="3301" class="btn btn-sm btn-outline-secondary viewListing" data-bs-toggle="modal" data-bs-target="#fakeAirbnbnModal">View</button>
+        
+                        </div>
+                    <small class="text-muted"><?= htmlspecialchars($listingInfo[$x]['price']); ?></small>
+
+                    </div>
                 </div>
-                <small class="text-muted">$960.00</small>
-
-            </div>
+            </div><!--.card-->
         </div>
-    </div><!--.card-->
-</div><!--.col-->
-
-
-
-
-
-
-        </div><!-- .container-->
+        <?php } ?>
+    </div>
+</div><!-- .container-->
 
 
     </main>
@@ -95,18 +106,28 @@
         </div>
     </footer>
     <!-- modal-->
+    <?php
+            $length = count($listingInfo);
+            for ($x = 0; $x < $length; $x++) {
+    ?>
     <div class="modal fade modal-lg" id="fakeAirbnbnModal" tabindex="-1" aria-labelledby="fakeAirbnbnModalLabel" aria-modal="true" role="dialog" >
       <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-title">1922 Craftsman Compound in Laurelhurst ~ Sleeps 12e</h5>
+                    <h5 class="modal-title" id="modal-title"><?= htmlspecialchars($listingInfo[$x]['name']); ?></h5>
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modal-image">
-                    <img src="https://a0.muscache.com/pictures/miso/Hosting-595680673819411804/original/a6e6fda5-2935-4e2e-ba34-2fc50bba5cf3.jpeg" class="img-fluid">
+                    <img src="<?= htmlspecialchars($listingInfo[$x]['pictureUrl']); ?>" class="img-fluid">
                 </div>
                 <div class="modal-footer">
-                    <p>Kerns neighborhood</p><p>$960.00 / night</p><p>Accommodates 12</p><p><i class="bi bi-star-fill"></i> 5.00</p><p>Hosted by Bob</p><p>Amenities: Air conditioning, Bathtub, Bed linens, Body soap, Carbon monoxide alarm, Cleaning products, Clothing storage, Coffee, Coffee maker: Keurig coffee machine, Conditioner, Cooking basics, Dedicated workspace, Dishes and silverware, Dishwasher, Dryer, Essentials, Fire extinguisher, First aid kit, Free street parking, Freezer, Hair dryer, Hangers, Heating, Hot water, Hot water kettle, Iron, Kitchen, Laundromat nearby, Long term stays allowed, Luggage dropoff allowed, Microwave, Outdoor dining area, Outdoor furniture, Oven, Pack ’n play/Travel crib, Private entrance, Private patio or balcony, Refrigerator, Room-darkening shades, Self check-in, Shampoo, Shower gel, Smart lock, Smoke alarm, Stove, TV, Toaster, Washer, Wifi, Wine glasses</p><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <p><?= htmlspecialchars($neighborhoods[$x]['neighborhood']); ?></p>
+                    <p><?= htmlspecialchars($listingInfo[$x]['price']); ?></p>
+                    <p>Accommodates: <?= htmlspecialchars($listingInfo[$x]['accommodates']); ?></p>
+                    <p><i class="bi bi-star-fill"></i> <?= htmlspecialchars($listingInfo[$x]['rating']); ?></p>
+                    <p>Hosted by <?= htmlspecialchars($hostInfo[$x]['hostName']); ?></p>
+                    <p>Amenities: Air conditioning, Bathtub, Bed linens, Body soap, Carbon monoxide alarm, Cleaning products, Clothing storage, Coffee, Coffee maker: Keurig coffee machine, Conditioner, Cooking basics, Dedicated workspace, Dishes and silverware, Dishwasher, Dryer, Essentials, Fire extinguisher, First aid kit, Free street parking, Freezer, Hair dryer, Hangers, Heating, Hot water, Hot water kettle, Iron, Kitchen, Laundromat nearby, Long term stays allowed, Luggage dropoff allowed, Microwave, Outdoor dining area, Outdoor furniture, Oven, Pack ’n play/Travel crib, Private entrance, Private patio or balcony, Refrigerator, Room-darkening shades, Self check-in, Shampoo, Shower gel, Smart lock, Smoke alarm, Stove, TV, Toaster, Washer, Wifi, Wine glasses</p>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -115,8 +136,6 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         
     <script src="js/script.js"></script>
-
+    <?php } ?>
   </body>
 </html>
-
-

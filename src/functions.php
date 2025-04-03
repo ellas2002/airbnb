@@ -13,33 +13,47 @@ function getNeighborhood(){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-//stores the reuslt of getNeighborhood function
-if (!isset($_SESSION['hoods'])) {
-   $_SESSION['hoods'] = getNeighborhood();
 
-    // echo "<pre>";
-    // print_r($_SESSION['hoods']);
-    // echo "</pre>";
-}
 
 //grabs room type from the database using PDO
 function getRoomType(){
     $conn = dbConnect();
  
-    $stmt = $conn->query("SELECT * FROM roomTypes ORDER BY type ASC");
+    $stmt = $conn->query("SELECT type FROM roomTypes ORDER BY type ASC");
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 }
 
-//stores the reuslt of getRoomType function
-if (!isset($_SESSION['room'])) {
-    $_SESSION['room'] = getRoomType();
-     
-     //echo "<pre>";
-     //print_r($_SESSION['room']);
-     //echo "</pre>";
- }
+
+//grabs array of names based on search results
+function getListings(){
+    $conn = dbConnect();
+ 
+    $stmt = $conn->query("SELECT * FROM listings LIMIT 10");
+
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // catch(Exce $e){
+    //     echo $e
+    // }
+}
+
+function getHost(){
+    $conn = dbConnect();
+ 
+    $stmt = $conn->query("SELECT * FROM hosts LIMIT 10");
+
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+// var_dump(getListings());
+
 
 
 function dbConnect(){
@@ -60,7 +74,6 @@ function dbConnect(){
     }
     return $db;
 }
-
 
 
 ?>

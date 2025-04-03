@@ -21,4 +21,9 @@
   width: 100%
 }
 
+.card{
+  display: grid;
+  grid-template-rows: auto, auto, auto;
+}
+
 

@@ -1,5 +1,8 @@
 <?php
     include 'src/functions.php';
+    $db = dbConnect();
+    $neighborhood = getNeighborhood();
+    $room = getRoomType();
 ?>
 
 <!doctype html>
@@ -57,9 +60,9 @@
                         <select id="neigh-select" name="hood">
                             <!-- have no idea if any should be a selection or not and how that would work sooooo i disabled it :)-->
                             <option selected="selected" disabled="disabled">Any</option>
-                            <?php foreach ($_SESSION['hoods'] as $hood): ?>
-                                <option value="<?= htmlspecialchars($hood['id']); ?>"
-                                    <?= (isset($_GET['hood']) && $_GET['hood'] == $hood['id']) ? 'selected' : ''; ?>>
+                            <?php foreach ($neighborhood as $hood): ?>
+                                <option value="<?= htmlspecialchars($hood['id']); ?>">
+                                    <?= (isset($_GET['hood']) && $_GET['hood'] == $hood['id']) ? 'selected' : ''; ?>
                                     <?= htmlspecialchars($hood['neighborhood']); ?> 
                                 </option>
                             <?php endforeach; ?>
@@ -74,10 +77,10 @@
                     <select id="roomType" name="room" >
                     <!-- have no idea if any should be a selection or not and how that would work sooooo i disabled it :)-->
                     <option selected="selected" disabled="disabled">Any</option>
-                    <?php foreach ($_SESSION['room'] as $rooms): ?>
+                    <?php foreach ($room as $rooms): ?>
                         <option value="<?= htmlspecialchars($rooms['id']); ?>"
-                            <?= (isset($_GET['room']) && $_GET['room'] == $hood['id']) ? 'selected' : ''; ?>>
-                            <?= htmlspecialchars($rooms['type']); ?> <!-- Change 'name' to correct column -->
+                            <?= (isset($_GET['room']) && $_GET['room'] == $rooms['id']) ? 'selected' : ''; ?>>
+                            <?= htmlspecialchars($rooms['id']); ?> 
                         </option>
                     <?php endforeach; ?>
                     </select>
@@ -94,7 +97,7 @@
                                 ?>
                                     <option value="<?php echo $i;?>"><?php echo $i;?></option>
                                 <?php
-                            }
+                            }        
                         ?>
                     </select>
                 </div>
