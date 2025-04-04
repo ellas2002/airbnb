@@ -3,12 +3,19 @@
 ?>
 
 <?php
+$hoodId = $_GET["hood"]?? null;;
+$roomId = $_GET["room"]?? null;;
+$guestId = $_GET["guestNum"]?? null;;
+
+//var_dump($hoodId);
 
 //grabs neighborhoods from the database using PDO
 function getNeighborhood(){
     $conn = dbConnect();
  
     $stmt = $conn->query("SELECT * FROM neighborhoods ORDER BY neighborhood ASC");
+
+    $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -18,21 +25,28 @@ function getNeighborhood(){
 //grabs room type from the database using PDO
 function getRoomType(){
     $conn = dbConnect();
- 
-    $stmt = $conn->query("SELECT type FROM roomTypes ORDER BY type ASC");
+    
+    //$stmt = $conn->query("SELECT * FROM roomTypes ORDER BY type ASC");
+    $stmt = $conn->query("SELECT * FROM roomTypes");
+
+    $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 }
 
 
+
 //grabs array of names based on search results
-function getListings(){
+function getListings($hoodId, $guestId, $roomId){
     $conn = dbConnect();
  
-    $stmt = $conn->query("SELECT * FROM listings LIMIT 10");
+    $stmt = $conn->prepare("SELECT * FROM listings 
+                        JOIN neighborhoods on listings.neighborhoodId=neighborhoods.id 
+                        WHERE listings.roomTypeId = ?
+                        AND listings.accommodates >= ?
+                        AND listings.neighborhoodId = ?");
 
-    $stmt->execute();
+    $stmt->execute([$roomId, $guestId, $hoodId]);
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -40,6 +54,37 @@ function getListings(){
     //     echo $e
     // }
 }
+
+
+//var_dump(getListings($hoodId, $guestId, $roomId));
+
+function getUserRoom($roomId){
+    $conn = dbConnect();
+ 
+    $stmt = $conn->prepare("SELECT type FROM roomTypes
+                        WHERE roomTypes.id = ?");
+
+    $stmt->execute([$roomId]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+//var_dump(getUserRoom($roomId));
+
+function getUserNeighborhood($hoodId){
+    $conn = dbConnect();
+ 
+    $stmt = $conn->prepare("SELECT neighborhood FROM neighborhoods
+                        WHERE neighborhoods.id = ?");
+
+    $stmt->execute([$hoodId]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+
 
 function getHost(){
     $conn = dbConnect();
@@ -52,7 +97,7 @@ function getHost(){
 
 }
 
-// var_dump(getListings());
+//var_dump(getHost());
 
 
 

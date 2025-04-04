@@ -61,8 +61,8 @@
                             <!-- have no idea if any should be a selection or not and how that would work sooooo i disabled it :)-->
                             <option selected="selected" disabled="disabled">Any</option>
                             <?php foreach ($neighborhood as $hood): ?>
-                                <option value="<?= htmlspecialchars($hood['id']); ?>">
-                                    <?= (isset($_GET['hood']) && $_GET['hood'] == $hood['id']) ? 'selected' : ''; ?>
+                                <option value="<?= htmlspecialchars($hood['id']); ?>"
+                                    <?= (isset($_GET['hood']) && $_GET['hood'] == $hood['id']) ? 'selected="selected"' : ''; ?>>
                                     <?= htmlspecialchars($hood['neighborhood']); ?> 
                                 </option>
                             <?php endforeach; ?>
@@ -79,8 +79,8 @@
                     <option selected="selected" disabled="disabled">Any</option>
                     <?php foreach ($room as $rooms): ?>
                         <option value="<?= htmlspecialchars($rooms['id']); ?>"
-                            <?= (isset($_GET['room']) && $_GET['room'] == $rooms['id']) ? 'selected' : ''; ?>>
-                            <?= htmlspecialchars($rooms['id']); ?> 
+                            <?= (isset($_GET['room']) && $_GET['room'] == $hood['type']) ? 'selected="selected"' : ''; ?>>
+                            <?= htmlspecialchars($rooms['type']); ?> 
                         </option>
                     <?php endforeach; ?>
                     </select>

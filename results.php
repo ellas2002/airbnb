@@ -1,9 +1,18 @@
 <?php
+    $hoodId = $_GET["hood"];
+    $roomId = $_GET["room"];
+    $guestId = $_GET["guestNum"];
+    
     include 'src/functions.php';
+    
     $db = dbConnect();
-    $listingInfo = getListings();
-    $neighborhoods = getNeighborhood();
+    $listingInfo = getListings($hoodId, $guestId, $roomId);
+    
+    $neighborhoodId = getUserNeighborhood($hoodId);
+    
     $hostInfo = getHost();
+    
+    $roomInfo = getUserRoom($roomId);
 ?>
 
 
@@ -46,19 +55,25 @@
             </div>
         </div>
     </header>
-
     <main>
 
 
 
 <div class="container">
-    <h1>Results</h1>
+    <?php    
+    $length = count($listingInfo);
+    ?>
+
+    <h1>Results (<?= htmlspecialchars($length) ?? 'N/A'; ?>) </h1>
+    
+    <label for="hoodId" class="form-label">Neighborhood: <?= htmlspecialchars($hoodName) ?? 'N/A'; ?>  </label><br> 
+    <label for="roomId" class="form-label">Room Type: <?= htmlspecialchars($roomInfo["type"]) ?? 'N/A'; ?> </label><br>
+    <label for="guestId" class="form-label">Accommodates: <?= htmlspecialchars($guestId) ?? 'N/A'; ?> </label><br>
 
 
     <div class="row row-cols-3 g-3">
         <!--for loop that allows multiple cards-->
         <?php
-            $length = count($listingInfo);
             for ($x = 0; $x < $length; $x++) {
         ?>
         <div class="col">
@@ -71,8 +86,8 @@
                 <div class="card-body">            
         
                     <h5 class="card-title"> <?= htmlspecialchars($listingInfo[$x]['name']); ?> </h5>
-                    <p class="card-text"><?= htmlspecialchars($neighborhoods[$x]['neighborhood']); ?></p> 
-                    <p class="card-text">Entire home/apt</p>
+                    <p class="card-text"><?= htmlspecialchars($neighborhoodId[0]['neighborhood']); ?></p> 
+                    <p class="card-text"><?= htmlspecialchars($roomInfo[0]['type']); ?></p>
                     
                     <p class="card-text">Accommodates: <?= htmlspecialchars($listingInfo[$x]['accommodates']); ?></p>
 
