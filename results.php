@@ -66,16 +66,21 @@
 
     <h1>Results (<?= htmlspecialchars($length) ?? 'N/A'; ?>) </h1>
     
-    <label for="hoodId" class="form-label">Neighborhood: <?= htmlspecialchars($hoodName) ?? 'N/A'; ?>  </label><br> 
-    <label for="roomId" class="form-label">Room Type: <?= htmlspecialchars($roomInfo["type"]) ?? 'N/A'; ?> </label><br>
+    <label for="hoodId" class="form-label">Neighborhood: <?= htmlspecialchars($neighborhoodId[0]['neighborhood']) ?? 'N/A'; ?>  </label><br> 
+    <label for="roomId" class="form-label">Room Type: <?= htmlspecialchars($roomInfo[0]['type']) ?? 'N/A'; ?> </label><br>
     <label for="guestId" class="form-label">Accommodates: <?= htmlspecialchars($guestId) ?? 'N/A'; ?> </label><br>
-
 
     <div class="row row-cols-3 g-3">
         <!--for loop that allows multiple cards-->
         <?php
-            for ($x = 0; $x < $length; $x++) {
+            if($length == 0){ 
         ?>
+                <h4 for="return" class="form-label">Sorry, no results - <?php echo "<a href=\"javascript:history.go(-1)\">Search again</a>";?>. </h4>
+        <?php   
+            } else {
+                for ($x = 0; $x < $length; $x++){
+        ?>
+  
         <div class="col">
             <div class="card shadow-sm">
 
@@ -106,7 +111,7 @@
                 </div>
             </div><!--.card-->
         </div>
-        <?php } ?>
+        <?php } } ?>
     </div>
 </div><!-- .container-->
 
@@ -136,7 +141,7 @@
                     <img src="<?= htmlspecialchars($listingInfo[$x]['pictureUrl']); ?>" class="img-fluid">
                 </div>
                 <div class="modal-footer">
-                    <p><?= htmlspecialchars($neighborhoods[$x]['neighborhood']); ?></p>
+                    <p><?= htmlspecialchars($neighborhoodId[0]['neighborhood']); ?></p>
                     <p><?= htmlspecialchars($listingInfo[$x]['price']); ?></p>
                     <p>Accommodates: <?= htmlspecialchars($listingInfo[$x]['accommodates']); ?></p>
                     <p><i class="bi bi-star-fill"></i> <?= htmlspecialchars($listingInfo[$x]['rating']); ?></p>

@@ -44,10 +44,11 @@ function getListings($hoodId, $guestId, $roomId){
                         JOIN neighborhoods on listings.neighborhoodId=neighborhoods.id 
                         WHERE listings.roomTypeId = ?
                         AND listings.accommodates >= ?
-                        AND listings.neighborhoodId = ?");
+                        AND listings.neighborhoodId = ?
+                        LIMIT 20");
 
     $stmt->execute([$roomId, $guestId, $hoodId]);
-
+    
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // catch(Exce $e){
@@ -62,7 +63,8 @@ function getUserRoom($roomId){
     $conn = dbConnect();
  
     $stmt = $conn->prepare("SELECT type FROM roomTypes
-                        WHERE roomTypes.id = ?");
+                        WHERE roomTypes.id = ?
+                        LIMIT 20");
 
     $stmt->execute([$roomId]);
 
@@ -76,7 +78,8 @@ function getUserNeighborhood($hoodId){
     $conn = dbConnect();
  
     $stmt = $conn->prepare("SELECT neighborhood FROM neighborhoods
-                        WHERE neighborhoods.id = ?");
+                        WHERE neighborhoods.id = ?
+                        LIMIT 20");
 
     $stmt->execute([$hoodId]);
 
