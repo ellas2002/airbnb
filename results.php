@@ -6,7 +6,7 @@
     include 'src/functions.php';
     
     $db = dbConnect();
-    $listingInfo = getListings($hoodId, $guestId, $roomId);
+    $listingInfo = getListings($db, $hoodId, $guestId, $roomId);
     
     $neighborhoodId = getUserNeighborhood($hoodId);
     
@@ -75,7 +75,7 @@
         <?php
             if($length == 0){ 
         ?>
-                <h4 for="return" class="form-label">Sorry, no results - <?php echo "<a href=\"javascript:history.go(-1)\">Search again</a>";?>. </h4>
+                <h4 for="return" class="form-label">Sorry, no results - <?php echo "<a href=\"javascript:history.go(-1)\">Search again</a>";?>. </h>
         <?php   
             } else {
                 for ($x = 0; $x < $length; $x++){
@@ -118,7 +118,7 @@
 
     </main>
 
-    <footer class="text-muted py-5">
+     <footer class="text-muted py-5">
         <div class="container">
 
             <p class="mb-1">CS 293, Spring 2025</p>
@@ -126,28 +126,17 @@
         </div>
     </footer>
     <!-- modal-->
-    <?php
-            $length = count($listingInfo);
-            for ($x = 0; $x < $length; $x++) {
-    ?>
     <div class="modal fade modal-lg" id="fakeAirbnbnModal" tabindex="-1" aria-labelledby="fakeAirbnbnModalLabel" aria-modal="true" role="dialog" >
       <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-title"><?= htmlspecialchars($listingInfo[$x]['name']); ?></h5>
+                    <h5 class="modal-title" id="modal-title"></h5>
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modal-image">
-                    <img src="<?= htmlspecialchars($listingInfo[$x]['pictureUrl']); ?>" class="img-fluid">
+            
                 </div>
                 <div class="modal-footer">
-                    <p><?= htmlspecialchars($neighborhoodId[0]['neighborhood']); ?></p>
-                    <p><?= htmlspecialchars($listingInfo[$x]['price']); ?></p>
-                    <p>Accommodates: <?= htmlspecialchars($listingInfo[$x]['accommodates']); ?></p>
-                    <p><i class="bi bi-star-fill"></i> <?= htmlspecialchars($listingInfo[$x]['rating']); ?></p>
-                    <p>Hosted by <?= htmlspecialchars($hostInfo[$x]['hostName']); ?></p>
-                    <p>Amenities: Air conditioning, Bathtub, Bed linens, Body soap, Carbon monoxide alarm, Cleaning products, Clothing storage, Coffee, Coffee maker: Keurig coffee machine, Conditioner, Cooking basics, Dedicated workspace, Dishes and silverware, Dishwasher, Dryer, Essentials, Fire extinguisher, First aid kit, Free street parking, Freezer, Hair dryer, Hangers, Heating, Hot water, Hot water kettle, Iron, Kitchen, Laundromat nearby, Long term stays allowed, Luggage dropoff allowed, Microwave, Outdoor dining area, Outdoor furniture, Oven, Pack ’n play/Travel crib, Private entrance, Private patio or balcony, Refrigerator, Room-darkening shades, Self check-in, Shampoo, Shower gel, Smart lock, Smoke alarm, Stove, TV, Toaster, Washer, Wifi, Wine glasses</p>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -156,6 +145,6 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         
     <script src="js/script.js"></script>
-    <?php } ?>
+
   </body>
 </html>

@@ -1,21 +1,36 @@
 
-$(document).ready(function() {
-    // Attach a click handler to the View button
-    $('.view-button').click(function() {
-      // Perform the AJAX request
-      $.ajax({
-        url: 'src/ajax.php', // The URL of your PHP script
-        type: 'GET', // Or POST, depending on your PHP script
-        success: function(response) {
-          // Handle the successful response from ajax.php
-          console.log('Success:', response);
-          // Update the page with the response, if needed
-          // $('#someDiv').html(response);
-        },
-        error: function(xhr, status, error) {
-          // Handle any errors
-          console.error('Error:', status, error);
-        }
-      });
-    });
+$(document).ready(function () {
+  $(".viewListing").click(function () {
+    var hood=$(this).data("hood");
+    var room=$(this).data("room");
+    var guestNum=$(this).data("guestNum");
+
+    $.ajax({
+      method: "GET",
+      url: "src/ajax.php",
+      data: {
+          hood: hood,
+          room: room,
+          guestNum: guestNum
+      }
+  }).done(function (data) {
+      console.log("Raw data:", data);  // Log raw data to check what's returned
+  
+      try {
+          const json = JSON.parse(data);  // Try to parse it as JSON
+          console.log("Parsed JSON:", json);
+          
+          var html = "<img src='" + json.pictureUrl + "'>";
+          var nameHtml = "<h5>" + json.name + "</h5>";
+  
+          $("#modal-image").html(html);
+          $("#modal-title").text(nameHtml);
+      } catch (e) {
+          console.error("Error parsing JSON:", e);  // Log parsing errors
+      }
   });
+  });
+});
+
+
+

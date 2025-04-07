@@ -37,7 +37,7 @@ function getRoomType(){
 
 
 //grabs array of names based on search results
-function getListings($hoodId, $guestId, $roomId){
+function getListings($conn, $hoodId, $guestId, $roomId){
     $conn = dbConnect();
  
     $stmt = $conn->prepare("SELECT * FROM listings 
