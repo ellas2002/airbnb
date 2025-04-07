@@ -1,34 +1,29 @@
-
 $(document).ready(function () {
   $(".viewListing").click(function () {
-    var hood=$(this).data("hood");
-    var room=$(this).data("room");
-    var guestNum=$(this).data("guestNum");
+    var id=$(this).attr("id");
+
 
     $.ajax({
       method: "GET",
       url: "src/ajax.php",
       data: {
-          hood: hood,
-          room: room,
-          guestNum: guestNum
+        id: id
       }
-  }).done(function (data) {
-      console.log("Raw data:", data);  // Log raw data to check what's returned
-  
-      try {
-          const json = JSON.parse(data);  // Try to parse it as JSON
-          console.log("Parsed JSON:", json);
+  }).done(function (data) {  
+
+        const json = JSON.parse(data);  // Try to parse it as JSON
+
+        picture = json[0].pictureUrl;
+        
+        var html = "<img src='" + json[0].pictureUrl + " 'class='img-fluid >";
+        var nameHtml = "<p>"+json[0].name+"</p>";
+        "<p>"+name+"</p><img src='"+pictureUrl+"'>";
+
+        $("#modal-image").html(picture);
+        $("#modal-title").text(nameHtml);
+
           
-          var html = "<img src='" + json.pictureUrl + "'>";
-          var nameHtml = "<h5>" + json.name + "</h5>";
-  
-          $("#modal-image").html(html);
-          $("#modal-title").text(nameHtml);
-      } catch (e) {
-          console.error("Error parsing JSON:", e);  // Log parsing errors
-      }
-  });
+    });
   });
 });
 

@@ -1,14 +1,14 @@
 <?php
-$hoodId = $_GET["hood"];
-$roomId = $_GET["room"];
-$guestId = $_GET["guestNum"];
 
-include 'src/functions.php';
+$id = $_GET["id"];
+
+include 'functions.php';
+include '../config/config.php';
 
 
 $db = dbConnect();
-$listingInfo = getListings($db, $hoodId, $guestId, $roomId);
+$listingStuff = jsListings($id);
+echo json_encode($listingStuff);
 
-echo json_encode($listingInfo);
 ?>
 

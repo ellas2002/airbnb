@@ -1,4 +1,5 @@
 <?php
+    include 'config/config.php';
     include 'src/functions.php';
     $db = dbConnect();
     $neighborhood = getNeighborhood();

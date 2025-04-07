@@ -1,5 +1,4 @@
 <?php
-    include 'config/config.php';
 ?>
 
 <?php
@@ -55,7 +54,20 @@ function getListings($conn, $hoodId, $guestId, $roomId){
     //     echo $e
     // }
 }
+function jsListings($id){
+    $conn = dbConnect();
+ 
+    $stmt = $conn->prepare("SELECT * FROM listings 
+                        WHERE id = ?");
 
+    $stmt->execute([$id]);
+    
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // catch(Exce $e){
+    //     echo $e
+    // }
+}
 
 //var_dump(getListings($hoodId, $guestId, $roomId));
 
