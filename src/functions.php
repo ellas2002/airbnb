@@ -1,5 +1,3 @@
-<?php
-?>
 
 <?php
 $hoodId = $_GET["hood"]?? null;;
@@ -19,7 +17,20 @@ function getNeighborhood(){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function neighborhood($id){
+    $conn = dbConnect();
+ 
+    $stmt = $conn->prepare("SELECT * FROM neighborhoods
+                        WHERE id = ?");
 
+    $stmt->execute([$id]);
+    
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // catch(Exce $e){
+    //     echo $e
+    // }
+}
 
 //grabs room type from the database using PDO
 function getRoomType(){
@@ -54,19 +65,21 @@ function getListings($conn, $hoodId, $guestId, $roomId){
     //     echo $e
     // }
 }
+
+
 function jsListings($id){
     $conn = dbConnect();
  
-    $stmt = $conn->prepare("SELECT * FROM listings 
-                        WHERE id = ?");
+    $stmt = $conn->prepare("SELECT * 
+                            FROM listings 
+                            JOIN hosts ON listings.hostId = hosts.id
+                            JOIN listingAmenities ON listings.id=listingAmenities.listingID
+                            JOIN amenities ON amenities.id=listingAmenities.amenityID
+                            WHERE listings.id = ?;");
 
     $stmt->execute([$id]);
     
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // catch(Exce $e){
-    //     echo $e
-    // }
 }
 
 //var_dump(getListings($hoodId, $guestId, $roomId));
