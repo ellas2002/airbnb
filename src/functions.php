@@ -4,7 +4,6 @@ $hoodId = $_GET["hood"]?? null;;
 $roomId = $_GET["room"]?? null;;
 $guestId = $_GET["guestNum"]?? null;;
 
-//var_dump($hoodId);
 
 //grabs neighborhoods from the database using PDO
 function getNeighborhood(){
@@ -17,20 +16,7 @@ function getNeighborhood(){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function neighborhood($id){
-    $conn = dbConnect();
- 
-    $stmt = $conn->prepare("SELECT * FROM neighborhoods
-                        WHERE id = ?");
 
-    $stmt->execute([$id]);
-    
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // catch(Exce $e){
-    //     echo $e
-    // }
-}
 
 //grabs room type from the database using PDO
 function getRoomType(){
@@ -50,7 +36,8 @@ function getRoomType(){
 function getListings($conn, $hoodId, $guestId, $roomId){
     $conn = dbConnect();
  
-    $stmt = $conn->prepare("SELECT * FROM listings 
+    $stmt = $conn->prepare("SELECT listings.*
+                        FROM listings 
                         JOIN neighborhoods on listings.neighborhoodId=neighborhoods.id 
                         WHERE listings.roomTypeId = ?
                         AND listings.accommodates >= ?
@@ -60,13 +47,11 @@ function getListings($conn, $hoodId, $guestId, $roomId){
     $stmt->execute([$roomId, $guestId, $hoodId]);
     
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // catch(Exce $e){
-    //     echo $e
-    // }
 }
 
 
+// function that grabs listings.id from results.php and populates the modal based on the id
+//many JOIN ON for grabing hosts and amennities so I dont have to create more functions for ajax (im lazy)
 function jsListings($id){
     $conn = dbConnect();
  
@@ -76,6 +61,7 @@ function jsListings($id){
                             JOIN listingAmenities ON listings.id=listingAmenities.listingID
                             JOIN amenities ON amenities.id=listingAmenities.amenityID
                             WHERE listings.id = ?;");
+                                    
 
     $stmt->execute([$id]);
     
@@ -84,6 +70,7 @@ function jsListings($id){
 
 //var_dump(getListings($hoodId, $guestId, $roomId));
 
+//before i really grasped JOIN not changing though
 function getUserRoom($roomId){
     $conn = dbConnect();
  
@@ -99,6 +86,7 @@ function getUserRoom($roomId){
 
 //var_dump(getUserRoom($roomId));
 
+//before i really grasped JOIN not changing though
 function getUserNeighborhood($hoodId){
     $conn = dbConnect();
  
@@ -113,7 +101,7 @@ function getUserNeighborhood($hoodId){
 }
 
 
-
+//before i really grasped JOIN not changing though
 function getHost(){
     $conn = dbConnect();
  
@@ -124,9 +112,6 @@ function getHost(){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 }
-
-//var_dump(getHost());
-
 
 
 function dbConnect(){

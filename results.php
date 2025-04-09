@@ -67,7 +67,7 @@
     ?>
 
     <h1>Results (<?= htmlspecialchars($length) ?? 'N/A'; ?>) </h1>
-    
+    <!-- info grabbed from user displayed -->
     <label for="hoodId" class="form-label">Neighborhood: <?= htmlspecialchars($neighborhoodId[0]['neighborhood']) ?? 'N/A'; ?>  </label><br> 
     <label for="roomId" class="form-label">Room Type: <?= htmlspecialchars($roomInfo[0]['type']) ?? 'N/A'; ?> </label><br>
     <label for="guestId" class="form-label">Accommodates: <?= htmlspecialchars($guestId) ?? 'N/A'; ?> </label><br>
@@ -106,7 +106,7 @@
                         <div class="btn-group">
                         <button type="button"
                                 class="btn btn-sm btn-outline-secondary viewListing"
-                                data-id="47"
+                                data-id="<?= htmlspecialchars($listingInfo[$x]['id']); ?>"
                                 data-bs-toggle="modal"
                                 data-bs-target="#fakeAirbnbnModal">
                             View
@@ -136,7 +136,8 @@
     <div class="modal fade modal-lg" id="fakeAirbnbnModal" tabindex="-1" aria-labelledby="fakeAirbnbnModalLabel" aria-modal="true" role="dialog" >
       <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <!-- All of this is populated in script.js -->
+                <div class="modal-header"> 
                     <h5 class="modal-title" id="modal-title"></h5>
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -156,6 +157,7 @@
                          Private entrance, Private patio or balcony, Refrigerator, Room-darkening shades, Self check-in, 
                          Shampoo, Shower gel, Smart lock, Smoke alarm, Stove, TV, Toaster, Washer, Wifi, Wine glasses</p>
                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- end -->
                 </div>
             </div>
         </div>
